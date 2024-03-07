@@ -21,4 +21,3 @@ And then run:
 npm install
 npm run start
 ```
-```

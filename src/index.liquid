@@ -2,13 +2,17 @@
 title: Data from Google Sheets
 layout: base
 ---
-<p>These examples use data from the <a href="https://docs.google.com/spreadsheets/d/18Pnw-kjaJhlcVuQZkNoCBTFTouT3CPpeEJb0JvewqPI/edit?usp=sharing">cscie114-demo-data Google Sheet</a>.</p>
+<p>These examples use data from the <a
+    href="https://docs.google.com/spreadsheets/d/18Pnw-kjaJhlcVuQZkNoCBTFTouT3CPpeEJb0JvewqPI/edit?usp=sharing">cscie114-demo-data
+    Google Sheet</a>.</p>
 <ul class="listing">
-  <li>Courses:
-    <a href="subject-listing/">Course Subjects</a>
+  <li>Courses: 
+    <ul class="listing compact">
+      <li><a href="subject-listing/">Simple Course Subjects Listing</a>, uses <code>subjects.js</code> and data from <code>subject</code> sheet</li>
+      <li><a href="subjects/">Subjects and Course Subject Pages</a>, uses 11ty collection built by pagination in <code>courses-pagination.liquid</code></li>
+    </ul>
   </li>
-  <li>Jamstack Resources (<code>urls.csv</code>):
+  <li>Jamstack Resources (<code>links-detail</code> sheet):<br />
     <a href="jamstack-resources/">Jamstack Resources</a>
   </li>
 </ul>
-

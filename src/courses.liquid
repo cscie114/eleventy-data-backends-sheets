@@ -1,0 +1,9 @@
+---
+title: Courses Listing
+layout: base
+---
+<ol class="listing courses">
+  {% for c in courses %}
+    <li>{{ c.shortTitle }} &mdash; {{ c.title }}</li>
+  {% endfor %}
+</ol>

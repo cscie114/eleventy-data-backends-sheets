@@ -1,15 +1,26 @@
-require("dotenv").config();
-const EleventyFetch = require("@11ty/eleventy-fetch");
+require('dotenv').config();
+const { AssetCache } = require("@11ty/eleventy-fetch");
+const { GoogleSpreadsheet } = require("google-spreadsheet");
+const { JWT } = require("google-auth-library");
+const cacheDuration = "15m";
 
 module.exports = async function () {
-  const data = await getDataFromSheets();
+  const cacheKey = "subjects";
+  const asset = new AssetCache(cacheKey);
+
+  // check if the cache is fresh within the last day
+  if (asset.isCacheValid(cacheDuration)) {
+    console.log("Returning cached subjects");
+    return asset.getCachedValue(); // a promise
+  }
+
+  const data = await getSubjectsFromSheets();
+  await asset.save(data, "json");
   return data;
 };
 
-async function getDataFromSheets() {
-  console.log("in getDataFromSheets");
-  const { GoogleSpreadsheet } = require("google-spreadsheet");
-  const { JWT } = require("google-auth-library");
+async function getSubjectsFromSheets() {
+  const sheetTitle = "subjects";
 
   // Initialize auth - see https://theoephraim.github.io/node-google-spreadsheet/#/guides/authentication
   const serviceAccountAuth = new JWT({
@@ -27,25 +38,22 @@ async function getDataFromSheets() {
   );
 
   await doc.loadInfo(); // loads document properties and worksheets
-  console.log(doc.title);
 
   //  const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
-  const sheetSubjects = doc.sheetsByTitle["subjects"];
-  console.log("subjects");
-  console.log(sheetSubjects.title);
-  console.log(sheetSubjects.rowCount);
-  console.log(sheetSubjects.gridProperties);
+  const sheet = doc.sheetsByTitle[sheetTitle];
+  console.log(sheet.title);
+  console.log(sheet.rowCount);
+  console.log(sheet.gridProperties);
 
-  const rows = await sheetSubjects.getRows();
+  const rows = await sheet.getRows();
   let subjectData = [];
-  console.log(rows.length); // 2
+  console.log(rows.length);
   rows.forEach((r) => {
     console.log(r.get("subjectFullName"));
     subjectData.push({
       subjectCode: r.get("subjectCode"),
       subjectFullName: r.get("subjectFullName"),
     });
-    //console.log(`${r.subjectCode}\t${r.subjectFullName}`);
   });
   return subjectData;
 }

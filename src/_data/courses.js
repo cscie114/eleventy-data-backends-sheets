@@ -5,22 +5,22 @@ const { JWT } = require("google-auth-library");
 const cacheDuration = "15m";
 
 module.exports = async function () {
-  const cacheKey = "resources";
+  const cacheKey = "courses";
   const asset = new AssetCache(cacheKey);
 
   // check if the cache is fresh within the last day
   if (asset.isCacheValid(cacheDuration)) {
-    console.log("Returning cached subjects");
+    console.log("Returning cached courses");
     return asset.getCachedValue(); // a promise
   }
 
-  const data = await getResourcesDataFromSheets();
+  const data = await getCoursesFromSheets();
   await asset.save(data, "json");
   return data;
 };
 
-async function getResourcesDataFromSheets() {
-  const sheetTitle = "links-detail";
+async function getCoursesFromSheets() {
+  const sheetTitle = "courses";
 
   // Initialize auth - see https://theoephraim.github.io/node-google-spreadsheet/#/guides/authentication
   const serviceAccountAuth = new JWT({
@@ -47,19 +47,42 @@ async function getResourcesDataFromSheets() {
 
   const rows = await sheet.getRows();
   let sheetData = [];
-  console.log("resources rows");
   console.log(rows.length);
-  console.log(rows[5].get("title"));
+  
+  let fields = [
+    "academicYear",
+    "term",
+    "termCode",
+    "courseCode",
+    "courseNumber",
+    "shortTitle",
+    "title",
+    "facultyDescription",
+    "subjectCode",
+    "subject",
+    "courseType",
+    "credits",
+    "creditUnvergraduate",
+    "creditGraduate",
+    "url",
+    "daysOfWeek",
+    "startTime",
+    "endTime",
+    "location",
+    "notes",
+    "description"
+  ];
+  
   rows.forEach((r) => {
-    if (r.get("title") && r.get("url")) {
-      sheetData.push({
-        url: r.get("url"),
-        title: r.get("title"),
-        description: r.get("description"),
-        localImage: r.get("localImage"),
-        image: r.get("image"),
-      });
-    }
+    let rowData = {};
+    fields.forEach((f) => {
+      rowData[f] = r.get(f);
+    });
+    sheetData.push(rowData);
   });
   return sheetData;
 }
+/*
+academicYear	term	termCode	courseCode	courseNumber	shortTitle	title	facultyDescription	subjectCode	subject	courseType	credits	creditUnvergraduate	creditGraduate	url	daysOfWeek	startTime	endTime	location	notes	description					
+
+*/

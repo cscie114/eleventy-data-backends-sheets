@@ -35,8 +35,9 @@ ul.listing li {
   margin-top: 1rem;
 }
 ul.listing.compact li {
-  line-height: 1.25;
+  line-height: 1.15;
   margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
 .courses .title,
 .courses .short-title {

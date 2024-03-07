@@ -1,6 +1,5 @@
 require("dotenv").config();
 const EleventyFetch = require("@11ty/eleventy-fetch");
-const creds = require("../../config/google-creds.json");
 
 module.exports = async function () {
   const data = await getDataFromSheets();

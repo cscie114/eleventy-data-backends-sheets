@@ -1,0 +1,11 @@
+---
+title: Course Subjects
+layout: base
+---
+
+<ul class="listing subjects">
+  {% assign subjectsSorted = subjects | sort: "subjectFullName" %}
+  {% for s in subjectsSorted %}
+    <li>{{ s.subjectCode }} &mdash; {{ s.subjectFullName }}</li>
+  {% endfor %}
+</ul>

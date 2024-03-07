@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+}
+:root {
+    --ink: rgb(10,10,10);
+    --gray-bkgd: rgb(240,240,240);
+}
+body {
+    font-family: helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--gray-bkgd);
+}
+
+main,
+header,
+footer {
+    padding: 1rem 3rem;
+}
+
+footer {
+    padding-top: 0.5rem;
+    border-top: 2px solid black;
+}
+
+ul.listing li {
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.courses .title,
+.courses .short-title {
+    font-weight: bold;
+}
+
+.courses .faculty-description {
+    font-style: italic;
+}
+
+.courses .description {
+    padding: 1rem;
+}
+
+.courses .more {
+    padding-right: 1rem;
+    text-align: right;
+}
+
+
+ul.resources {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-gap: 1rem;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  ul.resources li.resource {
+    border: thin solid var(--ink);
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  div.title {
+    margin: 0.5rem 0;
+    font-size: larger;
+  }
+  div.hostname {
+    font-family: "Source Code Pro", monospace;
+    font-weight: normal;
+    margin: 0.25rem 0;
+  }
+  ul.resources li img {
+    max-width: 100%;
+    max-height: 200px;
+    display: block;
+    margin: 0 auto;
+  }
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    color: blue;
+    text-decoration: none;
+  }
+  a:hover,
+  a:active {
+    text-decoration: underline;
+  }

@@ -2,27 +2,15 @@
 title: Jamstack Resources
 layout: base 
 ---
-<ul class="resources">
-  {% assign resourcesList = resources | sort: "url" %}
-  {% for r in resourcesList %}
-    {% if r.title %}
-      <li class="resource">
-        {% if r.image %}
-          <a class="concealed" href="{{r.url}}">
-            <img
-              src="{{ r.image }}"
-              onError="this.remove(); console.log(this);"
-              alt="*" />
-          </a>
-        {% endif %}
-        <div class="title">
-          <a href="{{ r.url }}">{{ r.title }}</a>
-        </div>
-        {% if r.hostname %}
-          <div class="hostname">{{ r.hostname }}</div>
-        {% endif %}
-        <div class="description">{{ r.description }}</div>
-      </li>
-    {% endif %}
-  {% endfor %}
-</ul>
+  <div class="resources">
+    {% assign resourcesList = resources %}
+    {% for r in resourcesList %}
+      <div class="resource">
+        {% if r.localImage %}<img src="/assets/{{r.localImage}}"/>
+        {% elsif r.image %}<img src="{{r.image}}" />{% endif %}
+        {% if r.title %}<div class="title"><a href="{{r.url}}">{{  r.title }}</a></div>{% endif %}
+        {% if r.url %}<div class="hostname">{% hostname r.url %}</div>{% endif %}
+        {% if r.description %}<div class="description">{{  r.description }}</div>{% endif %}
+      </div>
+    {% endfor %}
+  </div>

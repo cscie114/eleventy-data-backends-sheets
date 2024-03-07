@@ -2,7 +2,7 @@
 
 Illustrating how to use data from Google Sheets in eleventy (11ty).
 
-- [Google Sheets cscie114-demo-data]([https://www.11ty.dev/docs/data-custom/](https://docs.google.com/spreadsheets/d/18Pnw-kjaJhlcVuQZkNoCBTFTouT3CPpeEJb0JvewqPI/edit?usp=drive_link))
+- [Google Sheets cscie114-demo-data](https://docs.google.com/spreadsheets/d/18Pnw-kjaJhlcVuQZkNoCBTFTouT3CPpeEJb0JvewqPI/edit?usp=drive_link)
 - [google-spreadsheet](https://www.npmjs.com/package/google-spreadsheet) npm package
 
 ## Run
